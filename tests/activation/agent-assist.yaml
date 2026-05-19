@@ -1,0 +1,67 @@
+# Copyright (c) 2026 DataRobot, Inc. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# Activation test fixtures for datarobot-agent-assist skill.
+# Used by the gym machinery to validate that the skill fires on the right prompts
+# and stays silent on the wrong ones.
+#
+# Add new prompts as you discover edge cases. Tag with `surface` when a prompt
+# is specific to one harness (cursor, gemini, claude). Untagged prompts are
+# expected to work across all surfaces.
+
+skill: datarobot-agent-assist
+
+should_invoke:
+  # Core design / build / deploy intent
+  - prompt: "I want to build an AI agent on DataRobot"
+  - prompt: "Help me design an agent spec"
+  - prompt: "I have an agent_spec.md, help me implement it"
+  - prompt: "I want to deploy an AI agent to DataRobot"
+  - prompt: "Run a dress rehearsal on my agent"
+  - prompt: "I want to simulate my agent before coding it"
+  - prompt: "Create a LangGraph agent for DataRobot"
+  - prompt: "Help me scaffold a CrewAI agent targeting DataRobot"
+  - prompt: "I want to build a LlamaIndex agent and deploy it to DataRobot"
+
+  # Keyword triggers
+  - prompt: "What is dr-assist?"
+  - prompt: "How do I use datarobot-agent-assist?"
+  - prompt: "Set up the DataRobot agent template"
+  - prompt: "Start agent design"
+
+  # Extended surface area
+  - prompt: "I want to add an MCP server to my DataRobot agent"
+  - prompt: "Help me add a React frontend to my DataRobot agent app"
+  - prompt: "I'm building something with the DataRobot agent application template"
+  - prompt: "I want to create a RAG chatbot and deploy it to DataRobot"
+  - prompt: "I need an agentic custom application on DataRobot"
+  - prompt: "Help me use the dr CLI to deploy my agent"
+
+  # Japanese (Japan field accounts)
+  - prompt: "DataRobotでAIエージェントを作りたい"
+  - prompt: "エージェントのスペックを設計してください"
+
+should_not_invoke:
+  # Routes to datarobot-external-agent-monitoring
+  - prompt: "Monitor my DataRobot agent"
+  - prompt: "Add observability to my agent"
+  - prompt: "Instrument my agent with OpenTelemetry for DataRobot"
+  - prompt: "Set up tracing for my AI agent"
+
+  # Routes to datarobot-app-framework-cicd
+  - prompt: "Set up CI/CD for my DataRobot app"
+  - prompt: "Configure GitHub Actions for my DataRobot application"
+
+  # Routes to model skills
+  - prompt: "Train a model in DataRobot"
+  - prompt: "Deploy my model to DataRobot"
+  - prompt: "Make predictions with my DataRobot model"
+  - prompt: "Check my model's drift in DataRobot"
+  - prompt: "Get feature importance for my DataRobot model"
+
+  # Generic — no DataRobot context
+  - prompt: "Build me an AI agent"
+  - prompt: "Help me with LangGraph"
+  - prompt: "I want to build a chatbot"
+  - prompt: "What is an AI agent?"
+  - prompt: "Write me a Python script"
